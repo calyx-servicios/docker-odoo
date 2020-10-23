@@ -168,14 +168,3 @@ RUN pip install --user --no-cache-dir $SOURCES/odoo
 
 # Simulate odoo bin
 RUN if [ -f /home/odoo/.local/bin/openerp-server ]; then cp /home/odoo/.local/bin/openerp-server /home/odoo/.local/bin/odoo; fi
-
-#
-#   Odoo Enterprise
-#
-
-FROM odoo AS enterprise
-ARG GITHUB_USER
-ARG GITHUB_TOKEN
-ENV GITHUB_USER="$GITHUB_USER"
-ENV GITHUB_TOKEN="$GITHUB_TOKEN"
-RUN git clone --single-branch --depth $ODOO_SOURCE_DEPTH --branch $ODOO_VERSION https://$GITHUB_USER:$GITHUB_TOKEN@github.com/odoo/enterprise.git $SOURCES/enterprise
